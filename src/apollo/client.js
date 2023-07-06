@@ -9,7 +9,6 @@ const httpLink = new HttpLink({
     headers: {
         Authorization: `Bearer ${token}`,
     },
-    // credentials: 'include',
 })
 
 const client = new ApolloClient({
