@@ -4,7 +4,7 @@ import {GET_ALL_WORKSPACE} from "./apollo/controllers/workspace";
 
 function App() {
 
-    const { loading, error, data } = useQuery(GET_ALL_WORKSPACE);
+    const { error, data } = useQuery(GET_ALL_WORKSPACE);
     console.log(data)
 
     if(error) return <p>Error...</p>
