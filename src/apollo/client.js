@@ -1,16 +1,7 @@
-import {ApolloClient, HttpLink, InMemoryCache} from '@apollo/client';
-import token from './token';
-
-const httpLink = new HttpLink({
-    uri: 'http://localhost:8083/graphiql',
-    headers: {
-        authorization: `Bearer ${token}`,
-        // 'Content-Type': 'application/json'
-    },
-})
+import {ApolloClient, InMemoryCache} from '@apollo/client';
 
 const client = new ApolloClient({
-    link: httpLink,
+    uri: 'http://localhost:4007',
     cache: new InMemoryCache(),
 
 });

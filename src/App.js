@@ -1,17 +1,20 @@
 import './App.css';
-import { useQuery } from '@apollo/client';
-import {GET_ALL_WORKSPACE} from "./apollo/controllers/workspace";
+import {useGetAllPosts} from './apollo/services/PostsService'
 
 function App() {
 
-    const { error, data } = useQuery(GET_ALL_WORKSPACE);
+    const {loading, error, data} = useGetAllPosts();
     console.log(data)
 
     if(error) return <p>Error...</p>
+    if(loading) return null;
 
     return (
         <div className="App">
-          <p>Hello</p>
+            <p>Hello</p>
+            {data.posts.map(post =>
+                <p>{post.title}</p>
+            )}
         </div>
     );
 }
