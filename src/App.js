@@ -4,19 +4,17 @@ import {useState} from "react";
 
 function App() {
     const [post, setPostValue] = useState({});
-    console.log(post)
 
     const {loading, error, posts} = useGetAllPosts();
     const [removePost, removePostError] = useRemovePostService();
     const [addPostToDB, postError] = useAddPostService();
-    console.log(posts)
 
     const addPost = () => {
         addPostToDB({
               variables: {
                   title: post.title,
-                  user_id: post.id,
-                  views: post.views
+                  user_id: Math.round(Math.random()*1000),
+                  views: 1
               },
           });
         setPostValue({title :''});
@@ -28,16 +26,7 @@ function App() {
         })
     }
 
-    const handlePost = (e) => {
-        setPostValue({
-            title: e.target.value,
-            id: Math.round(Math.random()*1000),
-            currentDate: formatDate(new Date()),
-            views: 1
-        })
-    }
-
-    if(error || removePostError) return <p>Error...</p>
+    if(error || removePostError || postError) return <p>Error...</p>
     if(loading) return null;
     return (
         <div className="App">
@@ -45,7 +34,7 @@ function App() {
             <div>
                 <input
                     value={post.title}
-                    onChange={(e) => handlePost(e)}
+                    onChange={(e) => setPostValue({ title: e.target.value })}
                 />
                 <button onClick={addPost}>
                     Add post
