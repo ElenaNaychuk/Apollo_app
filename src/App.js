@@ -19,7 +19,7 @@ function App() {
                   views: post.views
               },
           });
-        setPostValue({});
+        setPostValue({title :''});
     }
 
     const deletePost = (id) => {
