@@ -1,6 +1,6 @@
-import {gql, useMutation, useQuery} from '@apollo/client';
+import { gql, useMutation, useQuery } from '@apollo/client';
 
-const  ALL_POSTS = gql`
+const ALL_POSTS = gql`
         query allPosts {
             posts: allPosts {
                 title
@@ -29,17 +29,26 @@ const ADD_POST = gql`
         }
     `;
 
+const UPDATE_POST = gql`
+        mutation updatePost($id: ID!, $title: String) {
+            updatePost(id: $id, title:$title) {
+                id
+                title
+            }
+        }
+    `;
+
 export const useLoadAllPosts = () => {
     const { loading, error, data } = useQuery(ALL_POSTS);
     return { loading, error, data };
 }
 
 export const useRemovePost = () => {
-    const [removePost, {error: removePostError}] = useMutation(REMOVE_POST, {
-        update(cache, { data: {removePost}}) {
+    const [removePost, { error: removePostError }] = useMutation(REMOVE_POST, {
+        update(cache, { data: { removePost } }) {
             cache.modify({
                 fields: {
-                    allPosts( currentPosts = []) {
+                    allPosts(currentPosts = []) {
                         return currentPosts.filter(
                             post => post.__ref !== `Post:${removePost.id}`
                         )
@@ -52,9 +61,9 @@ export const useRemovePost = () => {
 }
 
 export const useAddPostToDB = () => {
-    const [addPostToDB, {error: postError}] = useMutation(ADD_POST, {
-        update(cache, {data: { newPost }}) {
-            const {posts} = cache.readQuery({query: ALL_POSTS});
+    const [addPostToDB, { error: postError }] = useMutation(ADD_POST, {
+        update(cache, { data: { newPost } }) {
+            const { posts } = cache.readQuery({ query: ALL_POSTS });
             cache.writeQuery({
                 query: ALL_POSTS,
                 data: {
@@ -64,4 +73,9 @@ export const useAddPostToDB = () => {
         }
     });
     return [addPostToDB, postError];
+}
+
+export const useUpdatePost = () => {
+    const [updatePost, { error: updateError }] = useMutation(UPDATE_POST);
+    return [updatePost, updateError];
 }

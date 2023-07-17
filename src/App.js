@@ -1,44 +1,55 @@
 import './App.css';
-import {formatDate, useAddPostService, useGetAllPosts, useRemovePostService} from './apollo/services/PostsService'
-import {useState} from "react";
+import { formatDate, useAddPostService, useGetAllPosts, useRemovePostService, useEditPostService } from './apollo/services/PostsService'
+import { useState } from "react";
 
 function App() {
     const [post, setPostValue] = useState({});
+    const [editedPostTitle, setEditedPostTitle] = useState(post.title);
     console.log(post)
 
-    const {loading, error, posts} = useGetAllPosts();
+    const { loading, error, posts } = useGetAllPosts();
     const [removePost, removePostError] = useRemovePostService();
     const [addPostToDB, postError] = useAddPostService();
+    const [updatePost, updatePostError] = useEditPostService();
     console.log(posts)
 
     const addPost = () => {
         addPostToDB({
-              variables: {
-                  title: post.title,
-                  user_id: post.id,
-                  views: post.views
-              },
-          });
-        setPostValue({title :''});
+            variables: {
+                title: post.title,
+                user_id: post.id,
+                views: post.views
+            },
+        });
+        setPostValue({ title: '' });
     }
 
     const deletePost = (id) => {
         removePost({
-            variables: {id}
+            variables: { id }
+        })
+    }
+
+    const editPost = (id) => {
+        updatePost({
+            variables: {
+                id,
+                title: editedPostTitle,
+            }
         })
     }
 
     const handlePost = (e) => {
         setPostValue({
             title: e.target.value,
-            id: Math.round(Math.random()*1000),
+            id: Math.round(Math.random() * 1000),
             currentDate: formatDate(new Date()),
             views: 1
         })
     }
 
-    if(error || removePostError) return <p>Error...</p>
-    if(loading) return null;
+    if (error || removePostError || updatePostError) return <p>Error...</p>
+    if (loading) return null;
     return (
         <div className="App">
             <p>Hello</p>
@@ -53,13 +64,18 @@ function App() {
             </div>
             {posts.map(post =>
                 <div>
-                    <p>{post.title}</p>
+                    <input
+                        defaultValue={post.title}
+                        onChange={(e) => setEditedPostTitle(e.target.value)}
+                    />
                     <p>{post.currentDate}</p>
-                    <button onClick={()=> deletePost(+post.id)}>
+                    <button onClick={() => deletePost(+post.id)}>
                         Delete
                     </button>
+                    <button onClick={() => editPost(+post.id)}>
+                        Edit
+                    </button>
                 </div>
-
             )}
         </div>
     );

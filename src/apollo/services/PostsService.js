@@ -1,7 +1,7 @@
-import {useLoadAllPosts, useRemovePost, useAddPostToDB} from "../repositories/PostsPepository";
+import { useLoadAllPosts, useRemovePost, useAddPostToDB, useUpdatePost } from "../repositories/PostsPepository";
 
 export const useGetAllPosts = () => {
-    const {loading, error, data} = useLoadAllPosts();
+    const { loading, error, data } = useLoadAllPosts();
 
     const posts = data?.posts.map(post => ({
         ...post,
@@ -10,7 +10,7 @@ export const useGetAllPosts = () => {
 
     }));
 
-    return {loading, error, posts};
+    return { loading, error, posts };
 };
 
 export const useRemovePostService = () => {
@@ -21,18 +21,21 @@ export const useRemovePostService = () => {
 export const useAddPostService = () => {
     const [addPostToDB, postError] = useAddPostToDB();
     return [addPostToDB, postError];
-
 }
 
+export const useEditPostService = () => {
+    const [updatePost, updatePostError] = useUpdatePost();
+    return [updatePost, updatePostError];
+}
 
-function formatDateTimeNum(num){
-   return  num < 10 ? `0${num}` : num;
+function formatDateTimeNum(num) {
+    return num < 10 ? `0${num}` : num;
 }
 export function formatDate(date) {
     const d = date.getDate();
     const day = formatDateTimeNum(d);
     const m = date.getMonth() + 1;
-    const month =formatDateTimeNum(m);
+    const month = formatDateTimeNum(m);
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
 };
