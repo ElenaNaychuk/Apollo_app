@@ -1,0 +1,36 @@
+@use 'src/styles/mixins.scss' as mixins;
+@import "src/styles/vars.scss";
+
+.home-container {
+  min-height: calc(100vh - 80px - 126px);
+  background: $mainBackground;
+  padding: 30px 50px;
+  text-align: center;
+
+  .home-title {
+    @include mixins.font($bold, $font-24, $blackColor);
+  }
+
+  .home-citation-container {
+    margin-top: 30px;
+
+    .home-citation{
+      @include mixins.font($light, $font-20, $blackColor);
+    }
+    .home-author {
+      @include mixins.font($light, $font-18, $blackColor);
+    }
+  }
+
+  .home-select {
+    width: 500px;
+    max-width: 80vw;
+    min-height: 50px;
+    margin-top: 40px;
+    background: $whiteColor;
+    border: 3px solid $darkBrownColor;
+    border-radius: 8px;
+
+    @include mixins.font($light, $font-14, $blackColor);
+  }
+}

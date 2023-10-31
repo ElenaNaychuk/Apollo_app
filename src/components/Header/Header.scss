@@ -1,0 +1,29 @@
+@use 'src/styles/mixins.scss' as mixins;
+@import "src/styles/vars.scss";
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 50px;
+
+  .header-logo {
+    height: 60px;
+  }
+
+  .header-info-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+
+    .header-link {
+      text-decoration: none;
+      @include mixins.font($bold, $font-14, $blackColor);
+    }
+
+    .header-text {
+      @include mixins.font($bold, $font-14, $darkPinkColor);
+    }
+  }
+}

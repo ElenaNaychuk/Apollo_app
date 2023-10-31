@@ -1,0 +1,48 @@
+@use 'src/styles/mixins.scss' as mixins;
+@import "src/styles/vars.scss";
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $darkBrownColor;
+  padding: 20px 50px;
+  height: 126px;
+
+  .footer-info,
+  .footer-license {
+    @include mixins.font($normal, $font-14, $whiteColor);
+  }
+
+  .footer-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .footer-icons {
+      display: flex;
+      gap: 10px;
+
+      .footer-icon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .footer-link {
+      text-decoration: none;
+      @include mixins.font($light, $font-14, $whiteColor);
+    }
+
+    .footer-link:hover {
+      @include mixins.font($light, $font-14, $blueColor);
+    }
+  }
+
+  .footer-license {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
