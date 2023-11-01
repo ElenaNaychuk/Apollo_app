@@ -7,8 +7,16 @@
   padding: 30px 50px;
   text-align: center;
 
+  @media screen and (min-width: 375px) and (max-width: 675px) {
+    min-height: calc(100vh - 120px - 166px);
+  }
+
   .home-title {
     @include mixins.font($bold, $font-24, $blackColor);
+
+    @media screen and (min-width: 375px) and (max-width: 675px) {
+      @include mixins.font($bold, $font-20, $blackColor);
+    }
   }
 
   .home-citation-container {
@@ -16,9 +24,18 @@
 
     .home-citation{
       @include mixins.font($light, $font-20, $blackColor);
+
+      @media screen and (min-width: 375px) and (max-width: 675px) {
+        @include mixins.font($light, $font-14, $blackColor);
+      }
     }
     .home-author {
+      margin-top: 10px;
       @include mixins.font($light, $font-18, $blackColor);
+
+      @media screen and (min-width: 375px) and (max-width: 675px) {
+        @include mixins.font($light, $font-12, $blackColor);
+      }
     }
   }
 
@@ -29,7 +46,7 @@
     margin-top: 40px;
     background: $whiteColor;
     border: 3px solid $darkBrownColor;
-    border-radius: 8px;
+    border-radius: 50px;
 
     @include mixins.font($light, $font-14, $blackColor);
   }

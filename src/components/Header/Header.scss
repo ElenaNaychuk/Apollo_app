@@ -8,6 +8,11 @@
   height: 80px;
   padding: 0 50px;
 
+  @media screen and (min-width: 375px) and (max-width: 675px) {
+    height: 120px;
+    flex-direction: column;
+  }
+
   .header-logo {
     height: 60px;
   }
@@ -24,6 +29,10 @@
 
     .header-text {
       @include mixins.font($bold, $font-14, $darkPinkColor);
+    }
+
+    @media screen and (min-width: 375px) and (max-width: 675px) {
+      padding-bottom: 20px;
     }
   }
 }
