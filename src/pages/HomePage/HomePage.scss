@@ -39,15 +39,22 @@
     }
   }
 
-  .home-select {
+  .home-accordion {
     width: 500px;
-    max-width: 80vw;
     min-height: 50px;
-    margin-top: 40px;
-    background: $whiteColor;
-    border: 3px solid $darkBrownColor;
-    border-radius: 50px;
+    margin: 40px auto 0 auto;
+    text-align: start;
 
-    @include mixins.font($light, $font-14, $blackColor);
+    @include mixins.font($normal, $font-14, $blackColor);
+
+    @media screen and (min-width: 375px) and (max-width: 675px) {
+      width: 250px;
+    }
+
+    .home-accordion-link {
+      display: block;
+      padding: 10px;
+      @include mixins.font($light, $font-16, $pinkColor);
+    }
   }
 }

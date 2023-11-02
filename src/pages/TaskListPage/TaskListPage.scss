@@ -1,0 +1,53 @@
+@use 'src/styles/mixins.scss' as mixins;
+@import "src/styles/vars.scss";
+
+.taskList-container {
+  min-height: calc(100vh - 80px - 126px);
+  background: $mainBackground;
+  padding: 30px 100px;
+
+  @media screen and (min-width: 375px) and (max-width: 675px) {
+    min-height: calc(100vh - 120px - 166px);
+    padding: 10px 50px;
+  }
+
+  .taskList-title {
+    text-align: center;
+    @include mixins.font($bold, $font-24, $blackColor);
+
+    @media screen and (min-width: 375px) and (max-width: 675px) {
+      @include mixins.font($bold, $font-20, $blackColor);
+    }
+  }
+
+  .taskList-text {
+    margin-top: 20px;
+    @include mixins.font($light, $font-18, $blackColor);
+
+    @media screen and (min-width: 375px) and (max-width: 675px) {
+      @include mixins.font($light, $font-14, $blackColor);
+    }
+  }
+
+  .taskList-note {
+    padding: 20px;
+    margin-top: 30px;
+    border: 1px solid $pinkColor;
+    border-radius: 10px;
+
+    @include mixins.font($light, $font-16, $pinkColor);
+  }
+
+  .taskList-wrapper {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $darkBrownColor;
+    text-align: center;
+    margin: 30px auto 0 auto;
+
+    @include mixins.font($light, $font-18, $blackColor);
+  }
+}

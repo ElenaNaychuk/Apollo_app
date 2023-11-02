@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import './App.scss';
 import HomePage from "./pages/HomePage/HomePage";
+import TaskListPage from "./pages/TaskListPage/TaskListPage";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
         <Header />
         <div  className="content">
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/:courseId" element={<HomePage />} />
+                <Route path="/:courseId/:id" element={<TaskListPage />} />
             </Routes>
         </div>
         <Footer />

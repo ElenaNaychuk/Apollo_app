@@ -1,19 +1,21 @@
-import { Select } from 'antd';
+import {useParams} from "react-router-dom";
+import {Collapse} from 'antd';
+import {frontendTasks} from "../../frontendData.js";
+import {backendTasks} from "../../backendData.js";
+import {getCourseItems} from "./getCourseItems";
 import "./HomePage.scss";
 
 const HomePage = () => {
+    const {courseId} = useParams();
 
-    const options = [];
-    for (let i = 1; i <= 30; i++) {
-        options.push({
-            value: i,
-            label: i,
-        });
+    const getItems = () => {
+        if (courseId === 'frontend') {
+            return getCourseItems(frontendTasks, courseId);
+        }
+        if (courseId === 'backend') {
+            return getCourseItems(backendTasks, courseId);
+        }
     }
-
-    const handleChange = (value) => {
-        console.log(`selected ${value}`);
-    };
 
     return (
         <main className='home-container'>
@@ -23,12 +25,11 @@ const HomePage = () => {
                     вы себе представляли.&raquo;</p>
                 <p className='home-author'>&mdash; Генри Дэвид Торо</p>
             </div>
-            <Select
-                className='home-select'
-                onChange={handleChange}
-                options={options}
-                defaultValue="Выберите неделю"
+            <Collapse
+                className='home-accordion'
+                accordion={true}
                 bordered={false}
+                items={getItems()}
             />
         </main>
     )
